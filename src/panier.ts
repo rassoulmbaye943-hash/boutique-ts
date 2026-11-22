@@ -17,3 +17,11 @@ export function nombreArticles(panier: LignePanier[]): number {
 export function totalPanier(panier: LignePanier[]): number {
   return panier.reduce((somme, ligne) => somme + ligne.produit.prix * ligne.quantite, 0);
 }
+
+export function changerQuantite(panier: LignePanier[], idProduit: number, variation: number): LignePanier[] {
+  return panier
+    .map((ligne) =>
+      ligne.produit.id === idProduit ? { ...ligne, quantite: ligne.quantite + variation } : ligne,
+    )
+    .filter((ligne) => ligne.quantite > 0);
+}
